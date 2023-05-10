@@ -72,11 +72,14 @@ the bootstrap command will perform an upgrade if needed.
 Bootstrap Flux by specifying your GitHub repository fork URL:
 
 ```bash
-flux bootstrap git \
-  --author-email=<YOUR-EMAIL> \
-  --url=ssh://git@github.com/<YOUR-USERNAME>/gitops-istio \
+export GITHUB_TOKEN=<YOUR-GITHUB-TOKEN>
+
+flux bootstrap github \
+  --onwer=<YOUR-GITHUB-NAME> \
+  --repository=gitops-istio \
   --branch=main \
-  --path=clusters/my-cluster
+  --path=clusters/my-cluster \
+  --personal --token-auth
 ```
 
 The above command requires ssh-agent, if you're using Windows see
