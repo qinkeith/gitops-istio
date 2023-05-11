@@ -106,7 +106,7 @@ For the applications pods to be injected with Istio sidecar,
 the Istio control plane must be up and running before the apps.
 
 With Flux v2 you can specify the execution order by defining dependencies between objects.
-For example, in [clusters/my-cluster/apps.yaml](https://github.com/stefanprodan/gitops-istio/blob/main/clusters/my-cluster/apps.yaml)
+For example, in [clusters/my-cluster/apps.yaml](https://github.com/qinkeith/gitops-istio/blob/main/clusters/my-cluster/apps.yaml)
 we tell Flux that the `apps` reconciliation depends on the `istio-system` one:
 
 ```yaml
@@ -146,7 +146,7 @@ flux tree kustomization flux-system
 ## Istio customizations
 
 You can customize the Istio installation using the Flux `HelmReleases` located at
-[istio/system/istio.yaml](https://github.com/stefanprodan/gitops-istio/blob/main/istio/system/istio.yaml):
+[istio/system/istio.yaml](https://github.com/qinkeith/gitops-istio/blob/main/istio/system/istio.yaml):
 
 ```yaml
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
@@ -190,10 +190,10 @@ Istio upgrades are automated using GitHub Actions and Flux.
 ![Flux Istio Operator](docs/images/flux-istio-gitops.png)
 
 When a new Istio version is available, the
-[`update-istio` GitHub Action workflow](https://github.com/stefanprodan/gitops-istio/blob/main/.github/workflows/update-istio.yaml)
+[`update-istio` GitHub Action workflow](https://github.com/qinkeith/gitops-istio/blob/main/.github/workflows/update-istio.yaml)
 will open a pull request with the manifest updates needed for upgrading Istio.
 The new Istio version is tested on Kubernetes Kind by the
-[`e2e` workflow](https://github.com/stefanprodan/gitops-istio/blob/main/.github/workflows/e2e.yaml)
+[`e2e` workflow](https://github.com/qinkeith/gitops-istio/blob/main/.github/workflows/e2e.yaml)
 and when the PR is merged into the main branch, Flux will upgrade Istio on the production cluster.
 
 ## Application bootstrap
@@ -236,7 +236,7 @@ Flagger will route all traffic to the primary pods and scale to zero the `fronte
 Find the Istio ingress gateway address with:
 
 ```bash
-kubectl -n istio-system get svc istio-ingressgateway -ojson | jq .status.loadBalancer.ingress
+kubectl -n istio-system get svc istio-gateway -o json | jq .status.loadBalancer.ingress
 ```
 
 Open a browser and navigate to the ingress address, you'll see the frontend UI.
@@ -253,7 +253,7 @@ A canary analysis is triggered by changes in any of the following objects:
 
 For workloads that are not receiving constant traffic Flagger can be configured with a webhook, 
 that when called, will start a load test for the target workload. The canary configuration can be found
-at [apps/backend/canary.yaml](https://github.com/stefanprodan/gitops-istio/blob/main/apps/backend/canary.yaml).
+at [apps/backend/canary.yaml](https://github.com/qinkeith/gitops-istio/blob/main/apps/backend/canary.yaml).
 
 ![Flagger Canary Release](https://raw.githubusercontent.com/fluxcd/flagger/main/docs/diagrams/flagger-canary-steps.png)
 
