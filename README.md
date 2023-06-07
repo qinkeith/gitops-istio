@@ -452,6 +452,17 @@ You can extend the analysis with custom metric checks targeting
 For configuring alerting of the canary analysis for Slack, MS Teams, Discord or Rocket see the
 [docs](https://docs.flagger.app/usage/alerting#canary-configuration).
 
+## Check the status of your cluster
+
+* Find the istio gateway
+  
+  ```bash
+  $ k get svc -n istio-system
+  
+  istio-gateway        LoadBalancer   10.3.29.42   localhost     15021:30678/TCP,80:30586/TCP,443:31351/TCP   28d
+  ```
+* curl -i localhost
+
 ## Getting Help
 
 If you have any questions about progressive delivery:
