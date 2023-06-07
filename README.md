@@ -459,9 +459,14 @@ For configuring alerting of the canary analysis for Slack, MS Teams, Discord or 
   ```bash
   $ k get svc -n istio-system
   
+  NAME                 TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)
   istio-gateway        LoadBalancer   10.3.29.42   localhost     15021:30678/TCP,80:30586/TCP,443:31351/TCP   28d
   ```
-* curl -i localhost
+* Use the external ip to check 
+
+  ```bash
+  curl -i localhost
+  ```
 
 ## Getting Help
 
